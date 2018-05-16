@@ -8,17 +8,12 @@ import {ContactHttpService} from './contact-http.service';
 })
 export class ContactService {
 
-  // contacts: Contact[];
   constructor(private contactHttpService: ContactHttpService) {
-    /*
-    this.contacts = [];
-    this.contacts.push(new Contact(1, 'Sami', 'Suomalainen'));
-    this.contacts.push(new Contact(1, 'Juho', 'Montonen'));
-    this.contacts.push(new Contact(2, 'Pekka', 'Makkonen'));
-    */
+
   }
+
   getContacts(): Observable<Contact[]> {
     return this.contactHttpService.get();
-    }
+  }
 }
 
