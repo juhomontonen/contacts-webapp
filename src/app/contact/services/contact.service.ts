@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Contact} from './contact';
+import {Contact} from '../contact';
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +10,9 @@ export class ContactService {
 
   constructor() {
     this.contacts = [];
-    this.contacts.push(new Contact('Sami', 'Suomalainen'));
-    this.contacts.push(new Contact('Juho', 'Montonen'));
-    this.contacts.push(new Contact('Pekka', 'Makkonen'));
+    this.contacts.push(new Contact(1, 'Sami', 'Suomalainen'));
+    this.contacts.push(new Contact(1, 'Juho', 'Montonen'));
+    this.contacts.push(new Contact(2, 'Pekka', 'Makkonen'));
   }
 
   getContacts(): Contact[] {
