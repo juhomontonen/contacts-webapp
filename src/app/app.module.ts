@@ -10,6 +10,7 @@ import {ContactDetailComponent} from './contact/contact-detail/contact-detail.co
 import {RouterModule, Routes} from '@angular/router';
 import {MatButtonModule} from '@angular/material';
 import {MaterialComponentsModule} from './ui/material-components/material-components.module';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 const appRoutes: Routes = [
   {path: 'contacts', component: ContactListComponent},
@@ -29,7 +30,8 @@ const appRoutes: Routes = [
     FormsModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
-    MaterialComponentsModule
+    MaterialComponentsModule,
+    FlexLayoutModule
 
   ],
   providers: [
