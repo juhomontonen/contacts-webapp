@@ -13,23 +13,32 @@ export class ContactDetailComponent implements OnInit {
   contact: Contact;
 
   constructor(private router: Router, private route: ActivatedRoute, private contactService: ContactService) {
+    this.contact = new Contact();
   }
 
   ngOnInit() {
     const contactid = this.route.snapshot.paramMap.get('id');
-    console.log(contactid);
+
+    if (contactid == null) {
+      return;
+    }
+
     this.contactService.getContactById(contactid).subscribe(response => {
       this.contact = response;
       console.log(this.contact);
     }, error => {
       console.error('Getting contact failed!');
       console.error(error);
-        this.router.navigate(['/contacts']);
+      this.router.navigate(['/contacts']);
     });
   }
 
   onNavigateBack(): void {
     this.router.navigate(['/contacts']);
+  }
+
+  onSave(): void {
+    console.log('TODO: Save');
   }
 
 }
