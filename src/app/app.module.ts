@@ -14,6 +14,8 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {AvatarModule} from 'ng2-avatar';
 import { TextToColorPipe } from './contact/pipes/text-to-color.pipe';
 import {NgPipesModule} from 'ngx-pipes';
+import { ToolbarComponent } from './ui/toolbar/toolbar.component';
+import {ToolbarService} from './ui/toolbar/toolbar.service';
 
 
 const appRoutes: Routes = [
@@ -29,7 +31,8 @@ const appRoutes: Routes = [
     AppComponent,
     ContactListComponent,
     ContactDetailComponent,
-    TextToColorPipe
+    TextToColorPipe,
+    ToolbarComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +46,8 @@ const appRoutes: Routes = [
 
   ],
   providers: [
-    ContactService
+    ContactService,
+    ToolbarService
   ],
   bootstrap: [AppComponent]
 })

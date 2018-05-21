@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ContactService} from '../services/contact.service';
 import {Contact} from '../contact';
+import {ToolbarOptions} from '../../ui/toolbar/toolbar-options';
 
 @Component({
   selector: 'cw-contact-detail',
@@ -12,7 +13,8 @@ export class ContactDetailComponent implements OnInit {
 
   contact: Contact;
 
-  constructor(private router: Router, private route: ActivatedRoute, private contactService: ContactService) {
+  constructor(private router: Router, private route: ActivatedRoute, private contactService: ContactService,
+              private toolbar: ToolbarOptions) {
     this.contact = new Contact();
   }
 

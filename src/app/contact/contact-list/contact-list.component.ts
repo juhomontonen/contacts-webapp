@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Contact} from '../contact';
 import {ContactService} from '../services/contact.service';
 import {Route, Router} from '@angular/router';
+import {ToolbarService} from '../../ui/toolbar/toolbar.service';
 
 @Component({
   selector: 'cw-contact-list',
@@ -12,7 +13,7 @@ export class ContactListComponent implements OnInit {
 
   contacts: Contact[];
 
-  constructor(private contactService: ContactService, private router: Router) {
+  constructor(private contactService: ContactService, private router: Router, private toolbar: ToolbarService) {
     this.contacts = [];
   }
 
