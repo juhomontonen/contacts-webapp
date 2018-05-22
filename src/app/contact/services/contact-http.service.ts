@@ -5,6 +5,7 @@ import {map} from 'rxjs/operators';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {projection} from '@angular/core/src/render3/instructions';
+import {post} from 'selenium-webdriver/http';
 
 
 @Injectable({
@@ -28,5 +29,17 @@ export class ContactHttpService {
     return this.httpClient.get(this.url + '/' + id).pipe(map(response => {
      return response as Contact;
     }));
+  }
+
+  put(contact): Observable<Contact> {
+    return this.httpClient.put(this.url + '/' + contact.id, contact).pipe(map(response => {
+      return response as Contact;
+    }));
+  }
+
+  post(contact): Observable<Contact> {
+      return this.httpClient.put(this.url + '/' + contact.id, contact).pipe(map(response => {
+        return response as Contact;
+      }));
   }
 }

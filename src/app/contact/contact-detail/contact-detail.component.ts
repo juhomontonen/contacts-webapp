@@ -15,6 +15,7 @@ export class ContactDetailComponent implements OnInit {
 
   contact: Contact;
   editingEnabled: boolean;
+  contactId: any;
 
   constructor(private router: Router, private route: ActivatedRoute,
               private contactService: ContactService, private toolbar: ToolbarService) {
@@ -57,7 +58,25 @@ export class ContactDetailComponent implements OnInit {
   }
 
   onSave(): void {
-    console.log('TODO: Save');
+    if (this.contactId == null) {
+      // Create contact
+      this.editingEnabled = false;
+      this.contactService.createContact(this.contact).subscribe(response => {
+        this.contact = response;
+        console.log('Created contact');
+        console.log(this.contact);
+        this.toolbarAction[] = [new ToolbarAction(this.onEdit.bind(this), 'edit')];
+        this.toolbar.toolbarOptions.next(
+          new ToolbarOptions(
+            'Contact', toolbarAction));
+      });
+    } else {
+      // Edit contact
+      this.editingEnabled = false;
+      this.contactService.updateContact(this.contact).subscribe(response => {
+        this.contact = response;
+      });
+    }
   }
 
   onEdit() {
