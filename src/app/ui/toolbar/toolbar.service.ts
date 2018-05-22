@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {ToolbarOptions} from './toolbar-options';
 
@@ -11,7 +11,6 @@ export class ToolbarService {
 
   constructor() {
     this.toolbarOptions = new BehaviorSubject<ToolbarOptions>(
-      new ToolbarOptions([])
-    )
+      new ToolbarOptions('Contacts Application', []));
   }
 }

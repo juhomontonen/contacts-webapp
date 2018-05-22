@@ -2,7 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ContactService} from '../services/contact.service';
 import {Contact} from '../contact';
+import {ToolbarService} from '../../ui/toolbar/toolbar.service';
 import {ToolbarOptions} from '../../ui/toolbar/toolbar-options';
+import {ToolbarAction} from '../../ui/toolbar/toolbar-action';
 
 @Component({
   selector: 'cw-contact-detail',
@@ -13,19 +15,25 @@ export class ContactDetailComponent implements OnInit {
 
   contact: Contact;
 
-  constructor(private router: Router, private route: ActivatedRoute, private contactService: ContactService,
-              private toolbar: ToolbarOptions) {
+  constructor(private router: Router, private route: ActivatedRoute,
+              private contactService: ContactService, private toolbar: ToolbarService) {
     this.contact = new Contact();
   }
 
   ngOnInit() {
-    const contactid = this.route.snapshot.paramMap.get('id');
+    this.toolbar.toolbarOptions.next(
+      new ToolbarOptions(
+        'Contact', [
+          new ToolbarAction(this.onEdit, 'edit')
+        ]));
 
-    if (contactid == null) {
+    const contactId = this.route.snapshot.paramMap.get('id');
+
+    if (contactId == null) {
       return;
     }
 
-    this.contactService.getContactById(contactid).subscribe(response => {
+    this.contactService.getContactById(contactId).subscribe(response => {
       this.contact = response;
       console.log(this.contact);
     }, error => {
@@ -41,6 +49,10 @@ export class ContactDetailComponent implements OnInit {
 
   onSave(): void {
     console.log('TODO: Save');
+  }
+
+  onEdit() {
+    console.log('TODO: activate/deactivate edit mode');
   }
 
 }
