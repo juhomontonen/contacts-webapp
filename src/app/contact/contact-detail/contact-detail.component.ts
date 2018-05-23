@@ -25,32 +25,31 @@ export class ContactDetailComponent implements OnInit {
 
   ngOnInit() {
 
-    const contactId = this.route.snapshot.paramMap.get('id');
-    let toolbarAction: ToolbarAction[];
+    this.contactId = this.route.snapshot.paramMap.get('id');
+    let toolbarActions: ToolbarAction[];
 
-    if (contactId == null) {
+    if (this.contactId == null) {
       // Create contact
       this.editingEnabled = true;
-      toolbarAction = [];
-      return;
+      toolbarActions = [];
     } else {
-      // View / Edit contact
-      toolbarAction = [new ToolbarAction(this.onEdit.bind(this), 'edit')];
+      // View/Edit contact
+      toolbarActions = [new ToolbarAction(this.onEdit.bind(this), 'edit')];
+
+      this.contactService.getContactById(this.contactId).subscribe(response => {
+        this.contact = response;
+        console.log(this.contact);
+      }, error => {
+        console.error('Getting contact failed!');
+        console.error(error);
+        this.router.navigate(['/contacts']);
+      });
     }
 
     this.toolbar.toolbarOptions.next(
       new ToolbarOptions(
-        'Contact', toolbarAction));
+        'Contact', toolbarActions));
 
-
-    this.contactService.getContactById(contactId).subscribe(response => {
-      this.contact = response;
-      console.log(this.contact);
-    }, error => {
-      console.error('Getting contact failed!');
-      console.error(error);
-      this.router.navigate(['/contacts']);
-    });
   }
 
   onNavigateBack(): void {
@@ -62,13 +61,8 @@ export class ContactDetailComponent implements OnInit {
       // Create contact
       this.editingEnabled = false;
       this.contactService.createContact(this.contact).subscribe(response => {
-        this.contact = response;
-        console.log('Created contact');
-        console.log(this.contact);
-        this.toolbarAction[] = [new ToolbarAction(this.onEdit.bind(this), 'edit')];
-        this.toolbar.toolbarOptions.next(
-          new ToolbarOptions(
-            'Contact', toolbarAction));
+        console.log(response);
+        this.router.navigate(['/contact']);
       });
     } else {
       // Edit contact
@@ -77,10 +71,18 @@ export class ContactDetailComponent implements OnInit {
         this.contact = response;
       });
     }
+
   }
 
   onEdit() {
     this.editingEnabled = !this.editingEnabled;
+  }
+
+  onDelete() {
+    this.editingEnabled = false;
+    this.contactService.deleteContact(this.contact).subscribe(() => {
+      this.router.navigate(['/contacts']);
+    });
   }
 
 }

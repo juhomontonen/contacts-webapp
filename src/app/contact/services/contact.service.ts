@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import {Contact} from '../contact';
 import {Observable} from 'rxjs';
 import {ContactHttpService} from './contact-http.service';
@@ -9,7 +9,6 @@ import {ContactHttpService} from './contact-http.service';
 export class ContactService {
 
   constructor(private contactHttpService: ContactHttpService) {
-
   }
 
   getContacts(): Observable<Contact[]> {
@@ -27,5 +26,8 @@ export class ContactService {
   createContact(contact): Observable<Contact> {
     return this.contactHttpService.post(contact);
   }
-}
 
+  deleteContact(contact): Observable<any> {
+    return this.contactHttpService.delete(contact);
+  }
+}
