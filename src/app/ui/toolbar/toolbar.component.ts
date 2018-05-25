@@ -18,7 +18,8 @@ export class ToolbarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.toolbar.toolbarOptions.subscribe((options: ToolbarOptions) => {
+
+    this.toolbar.getToolbarOptions().subscribe((options: ToolbarOptions) => {
       this.options = options;
     });
   }
