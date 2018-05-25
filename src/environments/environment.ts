@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiendpointurl: 'http://localhost:3000/contacts'
+  apiendpointurl: 'http://localhost:57414/api/contacts'
 };
 
 /*
