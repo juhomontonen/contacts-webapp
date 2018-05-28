@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  apiendpointurl: 'http://localhost:57414/api/contacts'
 };
