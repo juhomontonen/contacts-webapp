@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiendpointurl: 'http://jmcontactswebapi.azurewebsites.net'
+  apiendpointurl: 'https://jmcontactswebapi.azurewebsites.net'
 };
