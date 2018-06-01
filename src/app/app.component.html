@@ -12,8 +12,13 @@
           <span>Juhon tekemä sovellus</span>
         </div>
       </div>
+      <mat-divider></mat-divider>
       <div>
-        <span>Sidenav content</span>
+        <mat-nav-list>
+          <mat-list-item>
+            <a routerLink="login" (click)="sidenav.toggle()">Sign out</a>
+          </mat-list-item>
+        </mat-nav-list>
       </div>
     </div>
   </mat-sidenav>
