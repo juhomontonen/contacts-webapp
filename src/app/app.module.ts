@@ -8,7 +8,7 @@ import {ContactService} from './contact/services/contact.service';
 import {HttpClientModule} from '@angular/common/http';
 import {ContactDetailComponent} from './contact/contact-detail/contact-detail.component';
 import {RouterModule, Routes} from '@angular/router';
-import {MatButtonModule} from '@angular/material';
+import {MAT_DIALOG_DEFAULT_OPTIONS, MatButtonModule, MatDialog, MatDialogRef} from '@angular/material';
 import {MaterialComponentsModule} from './ui/material-components/material-components.module';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {AvatarModule} from 'ng2-avatar';
@@ -20,6 +20,8 @@ import { LoginComponent } from './user/login/login.component';
 import {AuthenticationService} from './user/services/authentication.service';
 import {ContactHttpService} from './contact/services/contact-http.service';
 import {TokenService} from './user/services/token.service';
+import { ErrorDialogComponent } from './ui/error-dialog/error-dialog.component';
+import {DialogService} from './user/services/dialog.service';
 
 
 const appRoutes: Routes = [
@@ -38,7 +40,9 @@ const appRoutes: Routes = [
     ContactDetailComponent,
     TextToColorPipe,
     ToolbarComponent,
-    LoginComponent
+    LoginComponent,
+    ErrorDialogComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -48,7 +52,7 @@ const appRoutes: Routes = [
     MaterialComponentsModule,
     FlexLayoutModule,
     AvatarModule.forRoot(),
-    NgPipesModule
+    NgPipesModule,
 
   ],
   providers: [
@@ -56,7 +60,13 @@ const appRoutes: Routes = [
     ContactHttpService,
     ToolbarService,
     AuthenticationService,
-    TokenService
+    TokenService,
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}},
+    DialogService
+
+  ],
+  entryComponents: [
+    ErrorDialogComponent
   ],
   bootstrap: [AppComponent]
 })

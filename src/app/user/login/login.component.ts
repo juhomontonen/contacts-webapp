@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {UserCredentials} from '../user-credentials';
 import {AuthenticationService} from '../services/authentication.service';
 import {Router} from '@angular/router';
+import {DialogService} from '../services/dialog.service';
+
 
 @Component({
   selector: 'cw-login',
@@ -14,7 +16,7 @@ export class LoginComponent implements OnInit {
   loginFailed: boolean;
   errorMessage: string;
 
-  constructor(private authenticationService: AuthenticationService, private router: Router) {
+  constructor(private dialogService: DialogService, private authenticationService: AuthenticationService, private router: Router) {
     this.userCredentials = new UserCredentials();
     this.loginFailed = false;
     this.errorMessage = '';
@@ -36,6 +38,7 @@ export class LoginComponent implements OnInit {
         this.userCredentials.username = '';
         this.userCredentials.password = '';
         this.loginFailed = true;
+        this.dialogService.errorDialog('Wrong username or password.');
         this.errorMessage = 'Sign in failed';
         console.error('User sign in failed!');
       });
